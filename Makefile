@@ -1,10 +1,13 @@
-NAME = philo.a
+NAME = philo
 
-CFLAGS = -Wall -Werror -Wextra
+INC = /include/philo.h
+
+CFLAGS = -Wall -Werror -Wextra -pthread
 
 AR = ar -rc
 
-SRCS = philo.c
+SRCS =	src/philo.c \
+		src/utils.c \
 
 OBJS = $(SRCS:.c=.o)
 
@@ -12,6 +15,9 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 		$(AR) $(NAME) $(OBJS)
+
+%.o: %.c $(INC)
+		$(AR) $(FLAGS) -c $< -o $@
 
 clean:
 	$(RM) $(OBJS)
